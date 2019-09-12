@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 7f01cc189ede6684b9de7fcb98e3ecd3
+  - enabled: 1
+    path: Assets/Scenes/CreateParcours.unity
     guid: 1f77b951c25cf7e4daa7f4db6ddf0e75
+  - enabled: 1
+    path: Assets/Scenes/SelectParcours.unity
+    guid: 48558538cdfa8a34ba47d37206ac7fbb
+  - enabled: 1
+    path: Assets/Scenes/Play.unity
+    guid: 301cc39bdb606d24eba45bc0936b2c7e
   m_configObjects:
     com.unity.xr.arkit.PlayerSettings: {fileID: 11400000, guid: 057c1a8ba2734a04cafb6d168c6825f8,
       type: 2}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vuforia;
 
 namespace com.imie.geocaching
 {
@@ -15,6 +16,22 @@ namespace com.imie.geocaching
         public float growingSpeed;
 
         public bool isGrowing = true;
+
+        void Awake()
+        {
+            VuforiaARController.Instance.RegisterVuforiaInitializedCallback(OnVuforiaInitialized);
+        }
+
+        void OnVuforiaInitialized()
+        {
+            var deviceTracker = TrackerManager.Instance.InitTracker<PositionalDeviceTracker>();
+            deviceTracker.Start();
+        }
+
+        private void Start()
+        {
+            //this.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z +2);
+        }
 
         // Update is called once per frame
         void Update()

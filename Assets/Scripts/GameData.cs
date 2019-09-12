@@ -25,19 +25,6 @@ public class JouetObjet
     public float X;
     public float Z;
     public string Name;
-    
-    [System.NonSerialized]
-    private const float DEFAULT_Y = 3f;
-
-    public GameObject ToGameObject()
-    {
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-        go.transform.position.Set(X, DEFAULT_Y, Z);
-        go.name = Name;
-
-        return go;
-    }
 
     public static JouetObjet toJouetObjet(GameObject g)
     {

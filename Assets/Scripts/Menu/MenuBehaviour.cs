@@ -26,14 +26,19 @@ public class MenuBehaviour : MonoBehaviour
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect((Screen.width / 2) - 100, (Screen.height / 3) - 100, 200, 50), "Sélectionner un parcours"))
+        if (GUI.Button(new Rect((Screen.width / 2) - 100, (Screen.height / 3) - 50, 200, 100), "Sélectionner un parcours"))
         {
             SceneManager.LoadScene("SelectParcours");
         }
 
-        if (GUI.Button(new Rect((Screen.width / 2) - 100, ((Screen.height / 3) - 100) * 2, 200, 50), "Créer un parcours"))
+        if (GUI.Button(new Rect((Screen.width / 2) - 100, ((Screen.height / 3) - 50) * 2, 200, 100), "Créer un parcours"))
         {
             SceneManager.LoadScene("CreateParcours");
+        }
+
+        if (GUI.Button(new Rect((Screen.width / 2) - 100, ((Screen.height / 3) - 50) * 3, 200, 100), "Clear data"))
+        {
+            ClearData();
         }
     }
 
@@ -52,5 +57,10 @@ public class MenuBehaviour : MonoBehaviour
         {
             Debug.Log("Fichier introuvable !");
         }
+    }
+
+    public void ClearData()
+    {
+        File.WriteAllText(FILEPATH, "{}");
     }
 }

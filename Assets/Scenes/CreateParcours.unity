@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: af33243f94d0a4747b99dc9e1fce842b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: af33243f94d0a4747b99dc9e1fce842b, type: 3}
       propertyPath: m_IsActive
@@ -451,6 +451,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6065a5ad36706a4a8efd4f5431d8fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameData:
+    Parcours: []
+  FILEPATH: Assets/StreamingAssets/data.json
   lesGOs: []
   closest: {fileID: 0}
-  arrow: {fileID: 0}
+  axes: 0
+  sensitivityX: 5
+  sensitivityY: 5
+  minimumX: -360
+  maximumX: 360
+  minimumY: -60
+  maximumY: 60

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEditor;
 
 namespace com.imie.geocaching
 {
@@ -13,8 +14,6 @@ namespace com.imie.geocaching
 
         public List<GameObject> lesGOs;
         public int goIndex = 0;
-
-        public GameObject goToFind;
 
         public ArrowBehaviour arrow;
 
@@ -34,6 +33,7 @@ namespace com.imie.geocaching
         float speed = 3;
 
         private const float MIN_DIST = 5f;
+        private const float DEFAULT_Y = 3f;
 
         // Start is called before the first frame update
         void Start()
@@ -43,17 +43,19 @@ namespace com.imie.geocaching
             List<JouetObjet> lesJOs = gameData.Parcours[PlayerPrefs.GetInt("ParcoursIndex")].JouetObjets;
             foreach(JouetObjet jo in lesJOs)
             {
-                lesGOs.Add(jo.ToGameObject());
+                lesGOs.Add(ToGameObject(jo));
                 Debug.Log("GO " + jo.Name);
             }
 
             arrow.target = lesGOs[0];
+
+            Debug.Log("Tracking GO " + lesGOs[0].name + " @ {" + lesGOs[0].transform.position.x + ", " + lesGOs[0].transform.position.z + "}");
             //Cursor.lockState = CursorLockMode.Locked;
 
-            foreach (GameObject go in lesGOs)
-            {
-                go.SetActive(false);
-            }
+            //foreach (GameObject go in lesGOs)
+            //{
+            //    go.SetActive(false);
+            //}
         }
 
         // Update is called once per frame
@@ -116,15 +118,20 @@ namespace com.imie.geocaching
 
 
             // AFFICHAGE GAMEOBJECTS
-            goToFind = GetNextGameObject();
-
-            arrow.target = goToFind;
-
-            if (Approximately(goToFind.transform.position, MIN_DIST))
+            if (Approximately(lesGOs[goIndex].transform.position, MIN_DIST))
             {
-                goToFind.SetActive(true);
-                goToFind.GetComponent<Material>().color = Color.green;
+                //goToFind.SetActive(true);
+                lesGOs[goIndex].GetComponent<MeshRenderer>().material.color = Color.green;
+
                 goIndex++;
+
+                if (goIndex == lesGOs.Count)
+                {
+                    arrow.target = null;
+                    //SceneManager.LoadScene("Menu");
+                }
+
+                arrow.target = lesGOs[goIndex];
             }
         }
 
@@ -150,11 +157,6 @@ namespace com.imie.geocaching
             return Mathf.Abs(dy) < allowedDifference;
         }
 
-        public GameObject GetNextGameObject()
-        {
-            return lesGOs[goIndex];
-        }
-
         public GameData LoadJson()
         {
             if (File.Exists(FILEPATH))
@@ -166,6 +168,16 @@ namespace com.imie.geocaching
                 Debug.Log("Fichier introuvable !");
                 return null;
             }
+        }
+
+        public GameObject ToGameObject(JouetObjet jo)
+        {
+            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            go.transform.position = new Vector3(jo.X, DEFAULT_Y, jo.Z);
+            go.name = jo.Name;
+
+            return go;
         }
     }
 }

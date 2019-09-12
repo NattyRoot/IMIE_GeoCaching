@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Vuforia;
 
@@ -9,7 +10,8 @@ namespace com.imie.geocaching
     {
         public GameObject Camera;
         public GameObject target;
-        public float speed;
+        public List<MeshRenderer> arrowMR;
+        public float speed = 1;
 
         public float minX;
         public float maxX;
@@ -30,35 +32,25 @@ namespace com.imie.geocaching
 
         private void Start()
         {
-            //this.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z +2);
+            arrowMR = this.GetComponentsInChildren<MeshRenderer>().ToList();
         }
 
         // Update is called once per frame
         void Update()
         {
-            Vector3 targetDirection = target.transform.position - this.transform.position;
-            this.transform.position = Camera.transform.position;
-            this.transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * speed, 0.0f));
-            //this.transform.rotation = new Quaternion(this.transform.rotation.x, this.transform.rotation.y + Time.deltaTime, this.transform.rotation.z, this.transform.rotation.w);
-
-            // Change size
-            if (this.transform.localScale.x < maxX && isGrowing)
+            if (this.target == null && this.arrowMR.Any(am => am.material.color != Color.red))
             {
-                isGrowing = true;
-                this.transform.localScale = new Vector3(this.transform.localScale.x + Time.deltaTime / growingSpeed, this.transform.localScale.y, this.transform.localScale.z);
-            }
-            else
-            {
-                isGrowing = false;
+                foreach (var item in arrowMR)
+                {
+                    item.material.color = Color.red;
+                }
             }
 
-            if (this.transform.localScale.x > minX && !isGrowing)
+            if (this.target != null)
             {
-                this.transform.localScale = new Vector3(this.transform.localScale.x - Time.deltaTime / growingSpeed, this.transform.localScale.y, this.transform.localScale.z);
-            }
-            else
-            {
-                isGrowing = true;
+                Vector3 targetDirection = target.transform.position - this.transform.position;
+                this.transform.position = Camera.transform.position;
+                this.transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, targetDirection, Time.deltaTime * speed, 0.0f));
             }
         }
     }

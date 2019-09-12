@@ -29,7 +29,7 @@ namespace com.imie.geocaching
 
         float speed = 3;
 
-        private const float MIN_DIST = 5f;
+        private const float MIN_DIST = 3f;
         private const float DEFAULT_Y = 3f;
 
         // Start is called before the first frame update
@@ -106,7 +106,6 @@ namespace com.imie.geocaching
             }
         }
 
-
         private void OnGUI()
         {
             if (GUI.Button(new Rect(20, 40, 400, 200), "Créer un objet (O)"))
@@ -127,45 +126,11 @@ namespace com.imie.geocaching
                     SaveParcours();
                 }
             }
-        }
 
-        //With absolute value
-        public bool Approximately(Vector3 other, float allowedDifference)
-        {
-            Vector3 me = this.transform.position;
-
-            var dx = me.x - other.x;
-            if (Mathf.Abs(dx) > allowedDifference)
-                return false;
-
-            var dy = me.y - other.y;
-            return Mathf.Abs(dy) < allowedDifference;
-        }
-
-        public GameObject GetClosestGameObject()
-        {
-            float smallest = 99999f;
-            int smallestIndex = 0;
-            GameObject toReturn = null;
-            int i = 1;
-
-            foreach (GameObject go in lesGOs)
+            if (GUI.Button(new Rect(820, 40, 400, 200), "Retour au menu"))
             {
-                float dist = Vector3.Distance(go.transform.position, this.transform.position);
-                if (dist < smallest)
-                {
-                    smallest = dist;
-                    toReturn = go;
-                    smallestIndex = i;
-                }
-
-                go.SetActive(false);
-
-                i++;
+                SceneManager.LoadScene("Menu");
             }
-            Debug.Log("Le plus proche est le numéro " + smallestIndex);
-
-            return toReturn;
         }
 
         public void SaveParcours()

@@ -38,18 +38,25 @@ public class SelectParcoursBehaviour : MonoBehaviour
     private void OnGUI()
     {
         float x = 0;
-        float y = 0;
+        float y = 50;
         int i = 1;
+
+        if (GUI.Button(new Rect(x, y, Screen.width, 100), "Retour au menu"))
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
+        y = 150;
 
         foreach(Parcours p in gameData.Parcours)
         {
-            if (GUI.Button(new Rect(x, y, Screen.width, 50), "Parcours n." + i))
+            if (GUI.Button(new Rect(x, y, Screen.width, 100), "Parcours n." + i))
             {
                 PlayerPrefs.SetInt("ParcoursIndex", i - 1);
                 SceneManager.LoadScene("Play");
             }
             //x += 50;
-            y += 50;
+            y += 100;
             i++;
         }
     }

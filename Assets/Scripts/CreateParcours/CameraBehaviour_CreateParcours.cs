@@ -13,7 +13,7 @@ namespace com.imie.geocaching
 
         public List<GameObject> lesGOs;
         public GameObject closest;
-
+        /*
         public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
         public RotationAxes axes = RotationAxes.MouseXAndY;
         public float sensitivityX = 5F;
@@ -28,7 +28,7 @@ namespace com.imie.geocaching
         float rotationY = 0F;
 
         float speed = 3;
-
+        */
         private const float MIN_DIST = 3f;
         private const float DEFAULT_Y = 3f;
 
@@ -41,6 +41,7 @@ namespace com.imie.geocaching
         // Update is called once per frame
         void Update()
         {
+            /*
             if (axes == RotationAxes.MouseXAndY)
             {
                 float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -95,7 +96,7 @@ namespace com.imie.geocaching
             {
                 speed = 3;
             }
-
+            */
 
             // AFFICHAGE GAMEOBJECTS
             if (Input.GetKey(KeyCode.O))

@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: af33243f94d0a4747b99dc9e1fce842b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: af33243f94d0a4747b99dc9e1fce842b, type: 3}
       propertyPath: m_IsActive
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Camera: {fileID: 2085428141}
   target: {fileID: 0}
+  arrowMR: []
   speed: 1
   minX: 0
   maxX: 0
@@ -460,13 +461,6 @@ MonoBehaviour:
   lesGOs: []
   goIndex: 0
   arrow: {fileID: 1628114490}
-  axes: 0
-  sensitivityX: 5
-  sensitivityY: 5
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!114 &2085428143
 MonoBehaviour:
   m_ObjectHideFlags: 0

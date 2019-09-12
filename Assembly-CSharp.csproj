@@ -62,12 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ArrowBehaviour.cs" />
-    <Compile Include="Assets\Scripts\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\CreateParcours\CameraBehaviour_CreateParcours.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
-    <Compile Include="Assets\Scripts\MenuBehaviour.cs" />
-    <Compile Include="Assets\Scripts\PlayBehaviour.cs" />
-    <Compile Include="Assets\Scripts\SelectParcoursBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Menu\MenuBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Play\ArrowBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Play\CameraBehaviour_Play.cs" />
+    <Compile Include="Assets\Scripts\SelectParcours\SelectParcoursBehaviour.cs" />
     <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
     <None Include="Assets\Vuforia\Shaders\CameraDiffuse.shader" />
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />

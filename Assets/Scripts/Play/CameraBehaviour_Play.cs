@@ -140,7 +140,7 @@ namespace com.imie.geocaching
             }
 
             GUI.Label(new Rect(Screen.width - 250, 0f, 500, 200), " Camera : {" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + "}");
-            if (lesGOs.Count > 0)
+            if (lesGOs.Count > 0 && goIndex < lesGOs.Count)
             {
                 GUI.Label(new Rect(Screen.width - 250, 200f, 500, 200), " Cube (" + goIndex + ") : {" + lesGOs[goIndex].transform.position.x + ", " + lesGOs[goIndex].transform.position.y + ", " + lesGOs[goIndex].transform.position.z + "}");
             }

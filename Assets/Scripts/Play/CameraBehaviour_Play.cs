@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEditor;
+using System.Linq;
 
 namespace com.imie.geocaching
 {
@@ -40,19 +41,12 @@ namespace com.imie.geocaching
             gameData = GameData.LoadJson();
 
             List<JouetObjet> lesJOs = gameData.Parcours[PlayerPrefs.GetInt("ParcoursIndex")].JouetObjets;
-            foreach(JouetObjet jo in lesJOs)
-            {
-                lesGOs.Add(ToGameObject(jo));
-            }
+
+            lesJOs.ForEach(jo => lesGOs.Add(ToGameObject(jo)));
 
             arrow.target = lesGOs[0];
 
-            //Cursor.lockState = CursorLockMode.Locked;
-
-            //foreach (GameObject go in lesGOs)
-            //{
-            //    go.SetActive(false);
-            //}
+            lesGOs.ForEach(go => go.SetActive(false));
         }
 
         // Update is called once per frame

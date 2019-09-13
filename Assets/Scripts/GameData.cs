@@ -27,6 +27,8 @@ public class GameData
         {
             var fs = new FileStream(filepath, FileMode.Create);
             fs.Dispose();
+
+            SaveJson(new GameData());
         }
 
         return JsonUtility.FromJson<GameData>(File.ReadAllText(filepath));

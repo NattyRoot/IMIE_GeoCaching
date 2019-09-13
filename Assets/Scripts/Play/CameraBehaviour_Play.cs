@@ -33,7 +33,7 @@ namespace com.imie.geocaching
         float speed = 3;
         */
         private const float MIN_DIST = 5f;
-        private const float DEFAULT_Y = 3f;
+        private const float DEFAULT_Y = 0f;
 
         // Start is called before the first frame update
         void Start()

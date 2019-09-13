@@ -6,14 +6,12 @@ using System.IO;
 
 public class SelectParcoursBehaviour : MonoBehaviour
 {
-    string FILEPATH;
 
     GameData gameData;
 
     // Start is called before the first frame update
     void Start()
     {
-        FILEPATH = GameData.filepath;
         gameData = GameData.LoadJson();
     }
 

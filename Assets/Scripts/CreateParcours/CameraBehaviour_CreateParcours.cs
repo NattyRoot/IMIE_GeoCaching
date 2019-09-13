@@ -9,7 +9,6 @@ namespace com.imie.geocaching
     public class CameraBehaviour_CreateParcours : MonoBehaviour
     {
         public GameData gameData;
-        public string FILEPATH;
 
         public List<GameObject> lesGOs;
         public GameObject closest;
@@ -35,7 +34,6 @@ namespace com.imie.geocaching
         // Start is called before the first frame update
         void Start()
         {
-            FILEPATH = GameData.filepath;
             gameData = GameData.LoadJson();
         }
 

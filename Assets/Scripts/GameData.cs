@@ -20,7 +20,7 @@ public class GameData
     {
         if (filepath == null)
         {
-            filepath = Application.dataPath + "/Data/data.json";
+            filepath = Application.dataPath + "/data.json";
         }
 
         if (!File.Exists(filepath))
@@ -34,9 +34,7 @@ public class GameData
 
     public static void SaveJson(GameData gd)
     {
-        string dataAsJson = JsonUtility.ToJson(gd);
-
-        File.WriteAllText(filepath, dataAsJson);
+        File.WriteAllText(filepath, JsonUtility.ToJson(gd));
     }
 }
 

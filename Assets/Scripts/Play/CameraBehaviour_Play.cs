@@ -10,7 +10,6 @@ namespace com.imie.geocaching
     public class CameraBehaviour_Play : MonoBehaviour
     {
         public GameData gameData;
-        public string FILEPATH;
 
         public List<GameObject> lesGOs;
         public int goIndex = 0;
@@ -38,7 +37,6 @@ namespace com.imie.geocaching
         // Start is called before the first frame update
         void Start()
         {
-            FILEPATH = GameData.filepath;
             gameData = GameData.LoadJson();
 
             List<JouetObjet> lesJOs = gameData.Parcours[PlayerPrefs.GetInt("ParcoursIndex")].JouetObjets;

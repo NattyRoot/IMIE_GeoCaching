@@ -7,16 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    public static GameData gameData;
-
-
-    string FILEPATH;
-
     // Start is called before the first frame update
     void Start()
     {
-        FILEPATH = GameData.filepath;
-        gameData = GameData.LoadJson();
     }
 
     // Update is called once per frame
@@ -45,6 +38,6 @@ public class MenuBehaviour : MonoBehaviour
 
     public void ClearData()
     {
-        File.WriteAllText(FILEPATH, "{}");
+        GameData.SaveJson(new GameData());
     }
 }

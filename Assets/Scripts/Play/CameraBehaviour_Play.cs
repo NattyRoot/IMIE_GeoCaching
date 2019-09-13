@@ -16,7 +16,7 @@ namespace com.imie.geocaching
         public int goIndex = 0;
 
         public ArrowBehaviour arrow;
-        /*
+        
         public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
         public RotationAxes axes = RotationAxes.MouseXAndY;
         public float sensitivityX = 5F;
@@ -31,9 +31,11 @@ namespace com.imie.geocaching
         float rotationY = 0F;
 
         float speed = 3;
-        */
+        
         private const float MIN_DIST = 5f;
         private const float DEFAULT_Y = 0f;
+
+        public bool developpement = false;
 
         // Start is called before the first frame update
         void Start()
@@ -53,62 +55,65 @@ namespace com.imie.geocaching
         // Update is called once per frame
         void Update()
         {
-            /*
-            if (axes == RotationAxes.MouseXAndY)
-            {
-                float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
-                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-                rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            if (developpement)
+            {
+                if (axes == RotationAxes.MouseXAndY)
+                {
+                    float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
-                transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
-            }
-            else if (axes == RotationAxes.MouseX)
-            {
-                transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
-            }
-            else
-            {
-                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-                rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+                    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                    rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-                transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
-            }
+                    transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+                }
+                else if (axes == RotationAxes.MouseX)
+                {
+                    transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+                }
+                else
+                {
+                    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                    rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-            // MOVEMENTS
-            if (Input.GetKey("d"))
-            {
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                    transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+                }
+
+                // MOVEMENTS
+                if (Input.GetKey("d"))
+                {
+                    transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+                }
+                if (Input.GetKey("q"))
+                {
+                    transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
+                }
+                if (Input.GetKey("z"))
+                {
+                    transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                }
+                if (Input.GetKey("s"))
+                {
+                    transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
+                }
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
+                }
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
+                }
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    speed = 6;
+                }
+                else
+                {
+                    speed = 3;
+                }
             }
-            if (Input.GetKey("q"))
-            {
-                transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            }
-            if (Input.GetKey("z"))
-            {
-                transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
-            }
-            if (Input.GetKey("s"))
-            {
-                transform.Translate(new Vector3(0, 0, -speed * Time.deltaTime));
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                transform.Translate(new Vector3(0, speed * Time.deltaTime, 0));
-            }
-            if (Input.GetKey(KeyCode.LeftControl))
-            {
-                transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
-            }
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                speed = 6;
-            }
-            else
-            {
-                speed = 3;
-            }
-            */
+            
 
             // AFFICHAGE GAMEOBJECTS
             if (goIndex != lesGOs.Count && Approximately(lesGOs[goIndex].transform.position, MIN_DIST))

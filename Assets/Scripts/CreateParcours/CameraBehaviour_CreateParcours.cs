@@ -9,7 +9,7 @@ namespace com.imie.geocaching
     public class CameraBehaviour_CreateParcours : MonoBehaviour
     {
         public GameData gameData;
-        public string FILEPATH = "Assets/StreamingAssets/data.json";
+        public string FILEPATH;
 
         public List<GameObject> lesGOs;
         public GameObject closest;
@@ -35,7 +35,8 @@ namespace com.imie.geocaching
         // Start is called before the first frame update
         void Start()
         {
-            gameData = LoadJson();
+            FILEPATH = GameData.filepath;
+            gameData = GameData.LoadJson();
         }
 
         // Update is called once per frame
@@ -136,12 +137,26 @@ namespace com.imie.geocaching
 
         public void SaveParcours()
         {
-            Parcours p = new Parcours();
-            p.JouetObjets = new List<JouetObjet>();
+            Parcours p = new Parcours
+            {
+                JouetObjets = new List<JouetObjet>()
+            };
 
             foreach (GameObject go in lesGOs)
             {
                 p.JouetObjets.Add(JouetObjet.toJouetObjet(go));
+            }
+
+            if (gameData == null)
+            {
+                gameData = new GameData
+                {
+                    Parcours = new List<Parcours>()
+                };
+            }
+            else if (gameData.Parcours == null)
+            {
+                gameData.Parcours = new List<Parcours>();
             }
 
             gameData.Parcours.Add(p);
@@ -149,24 +164,9 @@ namespace com.imie.geocaching
             SaveJson();
         }
 
-        public GameData LoadJson()
-        {
-            if (File.Exists(FILEPATH))
-            {
-                return JsonUtility.FromJson<GameData>(File.ReadAllText(FILEPATH));
-            }
-            else
-            {
-                Debug.Log("Fichier introuvable !");
-                return null;
-            }
-        }
-
         public void SaveJson()
         {
-            string dataAsJson = JsonUtility.ToJson(gameData);
-
-            File.WriteAllText(FILEPATH, dataAsJson);
+            GameData.SaveJson(gameData);
 
             SceneManager.LoadScene("Menu");
         }

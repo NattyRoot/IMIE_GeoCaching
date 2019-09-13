@@ -10,7 +10,7 @@ namespace com.imie.geocaching
     public class CameraBehaviour_Play : MonoBehaviour
     {
         public GameData gameData;
-        public string FILEPATH = "Assets/StreamingAssets/data.json";
+        public string FILEPATH;
 
         public List<GameObject> lesGOs;
         public int goIndex = 0;
@@ -38,18 +38,17 @@ namespace com.imie.geocaching
         // Start is called before the first frame update
         void Start()
         {
-            gameData = LoadJson();
+            FILEPATH = GameData.filepath;
+            gameData = GameData.LoadJson();
 
             List<JouetObjet> lesJOs = gameData.Parcours[PlayerPrefs.GetInt("ParcoursIndex")].JouetObjets;
             foreach(JouetObjet jo in lesJOs)
             {
                 lesGOs.Add(ToGameObject(jo));
-                Debug.Log("GO " + jo.Name);
             }
 
             arrow.target = lesGOs[0];
 
-            Debug.Log("Tracking GO " + lesGOs[0].name + " @ {" + lesGOs[0].transform.position.x + ", " + lesGOs[0].transform.position.z + "}");
             //Cursor.lockState = CursorLockMode.Locked;
 
             //foreach (GameObject go in lesGOs)
@@ -129,6 +128,8 @@ namespace com.imie.geocaching
                 if (goIndex == lesGOs.Count)
                 {
                     arrow.target = null;
+
+
                     //SceneManager.LoadScene("Menu");
                 }
 
@@ -148,22 +149,7 @@ namespace com.imie.geocaching
             {
                 arrow.target = null;
 
-                int rep = EditorGUILayout.Popup("Bien joué !", 1, new string[] { "" });
-
-                switch (rep)
-                {
-                    case 0:
-                        Debug.Log("0");
-                        break;
-                    case 1:
-                        Debug.Log("1");
-                        break;
-                    default:
-                        Debug.Log("default");
-                        break;
-                }
-
-                //SceneManager.LoadScene("Menu");
+                SceneManager.LoadScene("Menu");
             }
         }
 
@@ -178,19 +164,6 @@ namespace com.imie.geocaching
 
             var dy = me.y - other.y;
             return Mathf.Abs(dy) < allowedDifference;
-        }
-
-        public GameData LoadJson()
-        {
-            if (File.Exists(FILEPATH))
-            {
-                return JsonUtility.FromJson<GameData>(File.ReadAllText(FILEPATH));
-            }
-            else
-            {
-                Debug.Log("Fichier introuvable !");
-                return null;
-            }
         }
 
         public GameObject ToGameObject(JouetObjet jo)

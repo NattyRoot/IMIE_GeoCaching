@@ -6,33 +6,21 @@ using System.IO;
 
 public class SelectParcoursBehaviour : MonoBehaviour
 {
-    string FILEPATH = "Assets/StreamingAssets/data.json";
+    string FILEPATH;
 
     GameData gameData;
 
     // Start is called before the first frame update
     void Start()
     {
-        gameData = LoadJson();
+        FILEPATH = GameData.filepath;
+        gameData = GameData.LoadJson();
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public GameData LoadJson()
-    {
-        if (File.Exists(FILEPATH))
-        {
-            return JsonUtility.FromJson<GameData>(File.ReadAllText(FILEPATH));
-        }
-        else
-        {
-            Debug.Log("Fichier introuvable !");
-            return null;
-        }
     }
 
     private void OnGUI()

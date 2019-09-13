@@ -10,12 +10,13 @@ public class MenuBehaviour : MonoBehaviour
     public static GameData gameData;
 
 
-    const string FILEPATH = "Assets/StreamingAssets/data.json";
+    string FILEPATH;
 
     // Start is called before the first frame update
     void Start()
     {
-        LoadJson();
+        FILEPATH = GameData.filepath;
+        gameData = GameData.LoadJson();
     }
 
     // Update is called once per frame
@@ -39,23 +40,6 @@ public class MenuBehaviour : MonoBehaviour
         if (GUI.Button(new Rect((Screen.width / 2) - 100, ((Screen.height / 3) - 50) * 3, 200, 100), "Clear data"))
         {
             ClearData();
-        }
-    }
-
-    public void LoadJson()
-    {
-        if (File.Exists(FILEPATH))
-        {
-            gameData = JsonUtility.FromJson<GameData>(File.ReadAllText(FILEPATH));
-
-            foreach (Parcours p in gameData.Parcours)
-            {
-                Debug.Log(p.ToString());
-            }
-        }
-        else
-        {
-            Debug.Log("Fichier introuvable !");
         }
     }
 

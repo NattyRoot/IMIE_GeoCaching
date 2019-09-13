@@ -47,7 +47,7 @@ namespace com.imie.geocaching
 
             arrow.target = lesGOs[0];
 
-            lesGOs.ForEach(go => go.SetActive(false));
+            //lesGOs.ForEach(go => go.SetActive(false));
         }
 
         // Update is called once per frame

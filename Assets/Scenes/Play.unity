@@ -457,7 +457,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameData:
     Parcours: []
-  FILEPATH: Assets/StreamingAssets/data.json
   lesGOs: []
   goIndex: 0
   arrow: {fileID: 1628114490}
@@ -520,7 +519,7 @@ Camera:
     height: 1
   near clip plane: 0.05
   far clip plane: 2000
-  field of view: 60
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -546,7 +545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085428141}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -163.2, y: 4.1, z: -91.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

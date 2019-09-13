@@ -20,7 +20,7 @@ public class GameData
     {
         if (filepath == null)
         {
-            filepath = Application.dataPath + "/data.json";
+            filepath = Application.persistentDataPath + "/data.json";
         }
 
         if (!File.Exists(filepath))

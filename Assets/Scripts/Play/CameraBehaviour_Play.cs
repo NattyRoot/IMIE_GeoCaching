@@ -39,6 +39,7 @@ namespace com.imie.geocaching
         void Start()
         {
             gameData = GameData.LoadJson();
+            Camera.main.fieldOfView = 80f;
 
             List<JouetObjet> lesJOs = gameData.Parcours[PlayerPrefs.GetInt("ParcoursIndex")].JouetObjets;
 
@@ -110,10 +111,10 @@ namespace com.imie.geocaching
             */
 
             // AFFICHAGE GAMEOBJECTS
-            if (Approximately(lesGOs[goIndex].transform.position, MIN_DIST))
+            if (goIndex != lesGOs.Count && Approximately(lesGOs[goIndex].transform.position, MIN_DIST))
             {
-                //goToFind.SetActive(true);
                 lesGOs[goIndex].GetComponent<MeshRenderer>().material.color = Color.green;
+                lesGOs[goIndex].SetActive(true);
 
                 goIndex++;
 
@@ -121,11 +122,12 @@ namespace com.imie.geocaching
                 {
                     arrow.target = null;
 
-
                     //SceneManager.LoadScene("Menu");
                 }
-
-                arrow.target = lesGOs[goIndex];
+                else
+                {
+                    arrow.target = lesGOs[goIndex];
+                }
             }
         }
 
@@ -137,11 +139,10 @@ namespace com.imie.geocaching
                 SceneManager.LoadScene("Menu");
             }
 
-            if (goIndex == lesGOs.Count)
+            GUI.Label(new Rect(Screen.width - 250, 0f, 500, 200), " Camera : {" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + "}");
+            if (lesGOs.Count > 0)
             {
-                arrow.target = null;
-
-                SceneManager.LoadScene("Menu");
+                GUI.Label(new Rect(Screen.width - 250, 200f, 500, 200), " Cube (" + goIndex + ") : {" + lesGOs[goIndex].transform.position.x + ", " + lesGOs[goIndex].transform.position.y + ", " + lesGOs[goIndex].transform.position.z + "}");
             }
         }
 
@@ -154,15 +155,15 @@ namespace com.imie.geocaching
             if (Mathf.Abs(dx) > allowedDifference)
                 return false;
 
-            var dy = me.y - other.y;
-            return Mathf.Abs(dy) < allowedDifference;
+            var dz = me.z - other.z;
+            return Mathf.Abs(dz) < allowedDifference;
         }
 
         public GameObject ToGameObject(JouetObjet jo)
         {
             GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-            go.transform.position = new Vector3(jo.X, DEFAULT_Y, jo.Z);
+            go.transform.position = new Vector3(jo.X + transform.position.x, DEFAULT_Y, jo.Z + transform.position.z);
             go.name = jo.Name;
 
             return go;

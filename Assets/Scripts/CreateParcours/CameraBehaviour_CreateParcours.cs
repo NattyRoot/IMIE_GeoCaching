@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using Vuforia.UnityCompiled;
 
 namespace com.imie.geocaching
 {
@@ -35,6 +36,8 @@ namespace com.imie.geocaching
         void Start()
         {
             gameData = GameData.LoadJson();
+
+            Camera.main.fieldOfView = 80f;
         }
 
         // Update is called once per frame
@@ -130,6 +133,12 @@ namespace com.imie.geocaching
             if (GUI.Button(new Rect(820, 40, 400, 200), "Retour au menu"))
             {
                 SceneManager.LoadScene("Menu");
+            }
+
+            GUI.Label(new Rect(Screen.width - 250, 0f, 500, 200), " Camera : {" + transform.position.x + ", " + transform.position.y + ", " + transform.position.z + "}");
+            if (lesGOs.Count > 0)
+            {
+                GUI.Label(new Rect(Screen.width - 250, 200f, 500, 200), " Cube : {" + lesGOs[lesGOs.Count - 1].transform.position.x + ", " + lesGOs[lesGOs.Count - 1].transform.position.y + ", " + lesGOs[lesGOs.Count - 1].transform.position.z + "}");
             }
         }
 
